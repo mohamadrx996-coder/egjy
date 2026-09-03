@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// حسابات تسجيل الدخول — البرايم محفوظ بالحساب ولا يُنزال أبدًا
+model Account {
+  id           String   @id @default(cuid())
+  username     String   @unique
+  passwordHash String
+  salt         String
+  isPrime      Boolean  @default(false)
+  primeSince   DateTime?
+  primeProof   String?
+  createdAt    DateTime @default(now())
+  sessions     Session[]
+}
+
+// جلسات السيرفر — كوكي httpOnly يرجّع المستخدم حتى لو انمسح التخزين المحلي
+model Session {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  username  String
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+  account   Account  @relation(fields: [username], references: [username], onDelete: Cascade)
+}
