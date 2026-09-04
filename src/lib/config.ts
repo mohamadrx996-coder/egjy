@@ -25,7 +25,7 @@ export const PANEL_PASS = '1888';
  *    3) الصقه هنا بين العلامتين — مثل السطر التالي بالضبط:
  *       'postgresql://user:pass@ep-xxx-pooler.region.aws.neon.tech/neondb?sslmode=require'
  */
-export const DATABASE_URL = '';
+export const DATABASE_URL = 'postgresql://neondb_owner:npg_jkPlinLT51pu@ep-lingering-paper-at38qk8l-pooler.c-9.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require';
 
 /**
  * الحصول على رابط الويب هوك للسجلات
